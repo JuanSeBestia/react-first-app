@@ -1,0 +1,22 @@
+{
+    "todos": [
+        {
+            "title":"Task 1",
+            "user" : "JuanSe Bestia",
+            "description" : "lorem impsun",
+            "priority" : "low"
+        },
+        {
+            "title":"Task 2",
+            "user" : "JuanSe Bestia",
+            "description" : "lorem impsun",
+            "priority" : "medium"
+        },
+        {
+            "title":"Task 3",
+            "user" : "JuanSe Bestia",
+            "description" : "lorem impsun",
+            "priority" : "high"
+        }
+    ]
+}
