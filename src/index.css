@@ -12,3 +12,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.Navigation-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40px;
+  pointer-events: none;
+}

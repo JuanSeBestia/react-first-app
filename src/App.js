@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Container, Row, Col } from 'reactstrap';
 import './App.css';
 
 import { todos } from './mocks/tasks.json'
@@ -40,32 +40,27 @@ class App extends Component {
   render() {
     const tasks = this.state.todos.map((task, i) => {
       return (
-        <div className="col-md-4" key={task.title}>
+        <Col md="4" key={task.title}>
           <Task title={task.title} task={task}></Task>
-        </div>
+        </Col>
       )
     })
     return (
       <div className="App">
         <Navigation notification={this.state.todos.length} title={this.state.title}></Navigation>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-            </a>
-        </header>
-        <FormTask onAddTask={this.handleAddTask}></FormTask>
-        <div className="container">
-          <div className="row mt-4">
+
+        <Container>
+          <Row className="mt-4">
+            <Col md="4">
+              <FormTask onAddTask={this.handleAddTask}></FormTask>
+            </Col>
             {tasks}
+          </Row>
+        </Container>
+        <div className="container">
+
+          <div className="row mt-4">
+
           </div>
         </div>
 
