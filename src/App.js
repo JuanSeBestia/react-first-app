@@ -7,11 +7,12 @@ import { todos } from './mocks/tasks.json'
 import Navigation from './components/navigation/Navigations';
 import Task from './components/task/Task';
 import FormTask from './components/forms/FormTask';
+import Menu from './components/menu/MenuComponent';
 
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       title: "Tasks",
       nTasks: 10,
@@ -49,6 +50,7 @@ class App extends Component {
       <div className="App">
         <Navigation notification={this.state.todos.length} title={this.state.title}></Navigation>
 
+        <Menu />
         <Container>
           <Row className="mt-4">
             <Col md="4">
@@ -57,13 +59,6 @@ class App extends Component {
             {tasks}
           </Row>
         </Container>
-        <div className="container">
-
-          <div className="row mt-4">
-
-          </div>
-        </div>
-
       </div>
     );
   }
