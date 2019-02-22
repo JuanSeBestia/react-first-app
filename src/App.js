@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import './App.css';
 
 import { todos } from './mocks/tasks.json'
+import { DISHES } from './shared/dishes'
 
 import Navigation from './components/navigation/Navigations';
 import Task from './components/task/Task';
@@ -16,7 +17,8 @@ class App extends Component {
     this.state = {
       title: "Tasks",
       nTasks: 10,
-      todos: todos
+      todos: todos,
+      dishes: DISHES,
     };
     console.log("Hellow App Component", { todos: todos });
     this.handleAddTask = this.handleAddTask.bind(this);
@@ -38,27 +40,35 @@ class App extends Component {
     // })
   }
 
-  render() {
+  TasksComponent = () => {
     const tasks = this.state.todos.map((task, i) => {
       return (
         <Col md="4" key={task.title}>
           <Task title={task.title} task={task}></Task>
         </Col>
       )
-    })
+    });
+    return (
+      <Container>
+        <Row className="mt-4">
+          <Col md="4">
+            <FormTask onAddTask={this.handleAddTask}></FormTask>
+          </Col>
+          {tasks}
+        </Row>
+      </Container>
+    )
+  }
+
+  render() {
     return (
       <div className="App">
         <Navigation notification={this.state.todos.length} title={this.state.title}></Navigation>
 
-        <Menu />
-        <Container>
-          <Row className="mt-4">
-            <Col md="4">
-              <FormTask onAddTask={this.handleAddTask}></FormTask>
-            </Col>
-            {tasks}
-          </Row>
-        </Container>
+        <Menu dishes={this.state.dishes} />
+
+        <this.TasksComponent />
+
       </div>
     );
   }
