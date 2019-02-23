@@ -5,9 +5,7 @@ import './App.css';
 
 import { DISHES } from './shared/dishes'
 
-import Navigation from './components/navigation/Navigations';
-import Menu from './components/menu/MenuComponent';
-import Tasks from './components/task/Tasks';
+import MainComponent from './components/MainComponent';
 
 
 class App extends Component {
@@ -21,19 +19,10 @@ class App extends Component {
     
   }
 
-  
-
-  
-
-  
-
   render() {
     return (
       <div className="App">
-        <Navigation notification={this.state.dishes.length} title={this.state.title}></Navigation>
-
-        <Menu dishes={this.state.dishes} />
-
+        <MainComponent dishes={this.state.dishes} />
       </div>
     );
   }
