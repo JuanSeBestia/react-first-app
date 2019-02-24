@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 
 import { DISHES } from '../shared/dishes'
-import { COMMETNS } from '../shared/dishes';
 import Menu from './menu/MenuComponent';
-import DishDetail from './menu/DishdetailComponent';
 import Header from './navigation/HeaderComponent';
 import Footer from './navigation/FooterComponent';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import HomePage from './pages/HomePage';
+import Contact from './pages/ContactComponent';
+import { COMMENTS } from '../shared/comments';
+import { PROMOTIONS } from '../shared/promotions';
+import { LEADERS } from '../shared/leaders';
 
 class MainComponent extends Component {
     constructor(props) {
@@ -15,6 +17,9 @@ class MainComponent extends Component {
         this.state = {
             title: "JuanSe Ristorante Con Fusion",
             dishes: DISHES,
+            comments: COMMENTS,
+            promotions: PROMOTIONS,
+            leaders: LEADERS
         };
         console.log("Hellow MainComponent", { state: this.state });
     }
@@ -22,7 +27,11 @@ class MainComponent extends Component {
     render() {
         const HomePageElement = () => {
             return (
-                <HomePage />
+                <HomePage
+                    dish={this.state.dishes.find(dish => dish.featured)}
+                    promotion={this.state.promotions.find(promo => promo.featured)}
+                    leader={this.state.leaders.find(leader => leader.featured)}
+                />
             )
         }
         return (
@@ -31,6 +40,7 @@ class MainComponent extends Component {
                 <Switch>
                     <Route path="/home" component={HomePageElement} />
                     <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                    <Route exact path='/contactus' component={Contact} />} />
                     <Redirect to="/home" />
                 </Switch>
                 {/* <Menu onClick={(dishId) => this.onDishSelect(dishId)} dishes={this.state.dishes} />

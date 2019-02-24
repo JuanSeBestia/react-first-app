@@ -1,30 +1,42 @@
-import { dishes } from '../mocks/dishes.json'
-
-export const DISHES = dishes;
-
-export const COMMETNS = [
-    {   
-        id:0,
-        date: new Date("1994-02-18"),
-        user: "JuanSe",
-        comment: "Very Delicius",
+export const DISHES = [
+    {
+    id: 0,
+    name:'Uthappizza',
+    image: '/assets/images/uthappizza.png',
+    category: 'mains',
+    label:'Hot',
+    price:'4.99',
+    featured: true,
+    description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'                    
     },
     {
-        id:1,
-        date: new Date("1994-03-18"),
-        user: "JuanSe 3",
-        comment: "Very Delicius",
+    id: 1,
+    name:'Zucchipakoda',
+    image: '/assets/images/zucchipakoda.png',
+    category: 'appetizer',
+    label:'',
+    price:'1.99',
+    featured: false,
+    description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
     },
     {
-        id:2,
-        date: new Date("2008-02-18"),
-        user: "JuanSe 2",
-        comment: "Very Delicius Very DeliciusVery DeliciusVery DeliciusVery DeliciusVery DeliciusVery Delicius",
+    id: 2,
+    name:'Vadonut',
+    image: '/assets/images/vadonut.png',
+    category: 'appetizer',
+    label:'New',
+    price:'1.99',
+    featured: false,
+    description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
     },
     {
-        id:3,
-        date: new Date("2018-04-18"),
-        user: "JuanSe",
-        comment: "Very Delicius",
-    },
-]; 
+    id: 3,
+    name:'ElaiCheese Cake',
+    image: '/assets/images/elaicheesecake.png',
+    category: 'dessert',
+    label:'',
+    price:'2.99',
+    featured: false,
+    description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
+    }
+];
