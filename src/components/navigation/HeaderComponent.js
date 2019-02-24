@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand, Badge, Jumbotron } from 'reactstrap';
 import logo from './logo.svg';
 
 
-class Navigation extends Component {
+class Header extends Component {
     render() {
         return (
             <React.Fragment>
@@ -27,9 +27,18 @@ class Navigation extends Component {
                     </div>
 
                 </Jumbotron>
+
+                {/*
+        <>
+        </>
+        or 
+        <React.Fragment>
+        </React.Fragment>
+        */}
             </React.Fragment>
+
         )
     }
 }
 
-export default Navigation;
+export default Header;
