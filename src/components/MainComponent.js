@@ -6,7 +6,8 @@ import Menu from './menu/MenuComponent';
 import DishDetail from './menu/DishdetailComponent';
 import Header from './navigation/HeaderComponent';
 import Footer from './navigation/FooterComponent';
-
+import { Switch, Route, Redirect } from 'react-router-dom'
+import HomePage from './pages/HomePage';
 
 class MainComponent extends Component {
     constructor(props) {
@@ -14,26 +15,28 @@ class MainComponent extends Component {
         this.state = {
             title: "JuanSe Ristorante Con Fusion",
             dishes: DISHES,
-            selectedDish: null
         };
         console.log("Hellow MainComponent", { state: this.state });
     }
 
-    onDishSelect(dishId) {
-        this.setState({
-            selectedDish: dishId
-        })
-    }
-
     render() {
+        const HomePageElement = () => {
+            return (
+                <HomePage />
+            )
+        }
         return (
             <div>
                 <Header notification={this.state.dishes.length} title={this.state.title} />
+                <Switch>
+                    <Route path="/home" component={HomePageElement} />
+                    <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                    <Redirect to="/home" />
+                </Switch>
+                {/* <Menu onClick={(dishId) => this.onDishSelect(dishId)} dishes={this.state.dishes} />
 
-                <Menu onClick={(dishId) => this.onDishSelect(dishId)} dishes={this.state.dishes} />
+                <DishDetail comments={COMMETNS} dish={this.state.dishes.find(dish => dish.id === this.state.selectedDish)} /> */}
 
-                <DishDetail comments={COMMETNS} dish={this.state.dishes.find(dish => dish.id === this.state.selectedDish)} />
-                
                 <Footer />
             </div>
         );

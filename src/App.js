@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-
 import './App.css';
-
-
 import { DISHES } from './shared/dishes'
-
 import MainComponent from './components/MainComponent';
-
+import { BrowserRouter } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -16,14 +12,17 @@ class App extends Component {
       dishes: DISHES,
     };
     console.log("Hellow App Component", { state: this.state });
-    
+
   }
 
   render() {
     return (
-      <div className="App">
-        <MainComponent dishes={this.state.dishes} />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <MainComponent dishes={this.state.dishes} />
+        </div>
+      </BrowserRouter>
+
     );
   }
 }
