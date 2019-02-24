@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { DISHES } from '../shared/dishes'
+import { COMMETNS } from '../shared/dishes';
 import Menu from './menu/MenuComponent';
 import DishDetail from './menu/DishdetailComponent';
 import Navigation from './navigation/Navigations';
@@ -14,7 +15,7 @@ class MainComponent extends Component {
             dishes: DISHES,
             selectedDish: null
         };
-        console.log("Hellow MainComponent", { state: this.state }); 
+        console.log("Hellow MainComponent", { state: this.state });
     }
 
     onDishSelect(dishId) {
@@ -30,7 +31,8 @@ class MainComponent extends Component {
 
                 <Menu onClick={(dishId) => this.onDishSelect(dishId)} dishes={this.state.dishes} />
 
-                <DishDetail dish={this.state.dishes.find(dish => dish.id === this.state.selectedDish)} />
+                <DishDetail comments={COMMETNS} dish={this.state.dishes.find(dish => dish.id === this.state.selectedDish)} />
+
             </div>
         );
     }
