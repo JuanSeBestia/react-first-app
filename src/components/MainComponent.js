@@ -10,6 +10,7 @@ import Contact from './pages/ContactComponent';
 import { COMMENTS } from '../shared/comments';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
+import DishDetail from './menu/DishdetailComponent';
 
 class MainComponent extends Component {
     constructor(props) {
@@ -34,12 +35,23 @@ class MainComponent extends Component {
                 />
             )
         }
+
+        const DishWithId = ({ match }) => {
+            const dishId = parseInt(match.params.dishId);
+            return (
+                <DishDetail
+                    dish={this.state.dishes.find(dish => dish.id === dishId)}
+                    comments={this.state.comments.filter(comment => comment.dishId === dishId)}
+                />
+            )
+        }
         return (
             <div>
                 <Header notification={this.state.dishes.length} title={this.state.title} />
                 <Switch>
                     <Route path="/home" component={HomePageElement} />
                     <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                    <Route path="/menu/:dishId" component={DishWithId} />} />
                     <Route exact path='/contactus' component={Contact} />} />
                     <Redirect to="/home" />
                 </Switch>
