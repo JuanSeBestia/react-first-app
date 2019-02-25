@@ -11,6 +11,7 @@ import { COMMENTS } from '../shared/comments';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
 import DishDetail from './menu/DishdetailComponent';
+import About from './pages/AboutPage';
 
 class MainComponent extends Component {
     constructor(props) {
@@ -45,6 +46,12 @@ class MainComponent extends Component {
                 />
             )
         }
+
+        const AboutPage = () => {
+            return (
+                <About leaders={this.state.leaders} />
+            )
+        }
         return (
             <div>
                 <Header notification={this.state.dishes.length} title={this.state.title} />
@@ -53,12 +60,9 @@ class MainComponent extends Component {
                     <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
                     <Route path="/menu/:dishId" component={DishWithId} />} />
                     <Route exact path='/contactus' component={Contact} />} />
+                    <Route exact path='/aboutus' component={AboutPage} />} />
                     <Redirect to="/home" />
                 </Switch>
-                {/* <Menu onClick={(dishId) => this.onDishSelect(dishId)} dishes={this.state.dishes} />
-
-                <DishDetail comments={COMMETNS} dish={this.state.dishes.find(dish => dish.id === this.state.selectedDish)} /> */}
-
                 <Footer />
             </div>
         );
