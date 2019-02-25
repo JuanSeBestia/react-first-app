@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 
-import { DISHES } from '../shared/dishes'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Menu from './menu/MenuComponent';
 import Header from './navigation/HeaderComponent';
 import Footer from './navigation/FooterComponent';
-import { Switch, Route, Redirect } from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import Contact from './pages/ContactComponent';
-import { COMMENTS } from '../shared/comments';
-import { PROMOTIONS } from '../shared/promotions';
-import { LEADERS } from '../shared/leaders';
 import DishDetail from './menu/DishdetailComponent';
 import About from './pages/AboutPage';
+
+const mapStateToProps = state => {
+    return {
+        dishes: state.dishes,
+        comments: state.comments,
+        promotions: state.promotions,
+        leaders: state.leaders
+    }
+}
 
 class MainComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: "JuanSe Ristorante Con Fusion",
-            dishes: DISHES,
-            comments: COMMENTS,
-            promotions: PROMOTIONS,
-            leaders: LEADERS
         };
         console.log("Hellow MainComponent", { state: this.state });
     }
@@ -30,9 +32,9 @@ class MainComponent extends Component {
         const HomePageElement = () => {
             return (
                 <HomePage
-                    dish={this.state.dishes.find(dish => dish.featured)}
-                    promotion={this.state.promotions.find(promo => promo.featured)}
-                    leader={this.state.leaders.find(leader => leader.featured)}
+                    dish={this.props.dishes.find(dish => dish.featured)}
+                    promotion={this.props.promotions.find(promo => promo.featured)}
+                    leader={this.props.leaders.find(leader => leader.featured)}
                 />
             )
         }
@@ -41,23 +43,23 @@ class MainComponent extends Component {
             const dishId = parseInt(match.params.dishId);
             return (
                 <DishDetail
-                    dish={this.state.dishes.find(dish => dish.id === dishId)}
-                    comments={this.state.comments.filter(comment => comment.dishId === dishId)}
+                    dish={this.props.dishes.find(dish => dish.id === dishId)}
+                    comments={this.props.comments.filter(comment => comment.dishId === dishId)}
                 />
             )
         }
 
         const AboutPage = () => {
             return (
-                <About leaders={this.state.leaders} />
+                <About leaders={this.props.leaders} />
             )
         }
         return (
             <React.Fragment>
-                <Header notification={this.state.dishes.length} title={this.state.title} />
+                <Header notification={this.props.dishes.length} title={this.props.title} />
                 <Switch>
                     <Route path="/home" component={HomePageElement} />
-                    <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                    <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
                     <Route path="/menu/:dishId" component={DishWithId} />} />
                     <Route exact path='/contactus' component={Contact} />} />
                     <Route exact path='/aboutus' component={AboutPage} />} />
@@ -69,4 +71,4 @@ class MainComponent extends Component {
     }
 }
 
-export default MainComponent;
+export default withRouter(connect(mapStateToProps)(MainComponent));

@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
-import { DISHES } from './shared/dishes'
 import MainComponent from './components/MainComponent';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ConfigureStore } from './service/redux/configureStore';
+
+const store = ConfigureStore();
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: "JuanSe Excersises",
-      dishes: DISHES,
-    };
     console.log("Hellow App Component", { state: this.state });
-
   }
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <MainComponent dishes={this.state.dishes} />
-        </div>
-      </BrowserRouter>
-
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="App">
+            <MainComponent />
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
