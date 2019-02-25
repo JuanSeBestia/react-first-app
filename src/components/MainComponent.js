@@ -53,7 +53,7 @@ class MainComponent extends Component {
             )
         }
         return (
-            <div>
+            <React.Fragment>
                 <Header notification={this.state.dishes.length} title={this.state.title} />
                 <Switch>
                     <Route path="/home" component={HomePageElement} />
@@ -64,7 +64,7 @@ class MainComponent extends Component {
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />
-            </div>
+            </React.Fragment>
         );
     }
 }
