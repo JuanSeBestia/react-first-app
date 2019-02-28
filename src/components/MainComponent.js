@@ -11,7 +11,7 @@ import DishDetail from './menu/DishdetailComponent';
 import About from './pages/AboutPage';
 import { addComment, fetchDishes, fetchPromos, fetchComments, postComment } from '../service/redux/ActionCreators'
 import { actions } from 'react-redux-form';
-
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 const mapStateToProps = state => {
     return {
         dishes: state.dishes,
@@ -82,18 +82,24 @@ class MainComponent extends Component {
                 <About leaders={this.props.leaders} />
             )
         }
+        debugger;
         return (
             <React.Fragment>
                 <Header notification={this.props.dishes.length} title={this.props.title} />
-                <Switch>
-                    <Route path="/home" component={HomePageElement} />
-                    <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
-                    <Route path="/menu/:dishId" component={DishWithId} />} />
-                    <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
-                    <Route exact path='/aboutus' component={AboutPage} />} />
-                    <Redirect to="/home" />
-                </Switch>
+                <TransitionGroup>
+                    <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                        <Switch>
+                            <Route path="/home" component={HomePageElement} />
+                            <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
+                            <Route path="/menu/:dishId" component={DishWithId} />} />
+                            <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                            <Route exact path='/aboutus' component={AboutPage} />} />
+                            <Redirect to="/home" />
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
                 <Footer />
+
             </React.Fragment>
         );
     }
