@@ -8,18 +8,25 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom'
 import { Loading } from '../tools/LoadingComponent';
 import { baseUrl } from '../../shared/baseURL';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({ dish }) {
     if (dish != null)
         return (
             <div className="col-12 col-md-5 m-1">
-                <Card>
-                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <FadeTransform
+                    in
+                    transformProps={{
+                        exitTransform: 'scale(0.5) translateY(-50%)'
+                    }}>
+                    <Card>
+                        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                        <CardBody>
+                            <CardTitle>{dish.name}</CardTitle>
+                            <CardText>{dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </FadeTransform>
             </div>
         );
     else return (<div></div>)
@@ -28,10 +35,12 @@ function RenderDish({ dish }) {
 function RenderComments({ comments, addComment, dishId, postComment }) {
     const array_comments = comments.map((comment) => {
         return (
-            <ListGroupItem key={comment.id} >
-                <p>{comment.comment}</p>
-                <p>--{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(comment.date))}</p>
-            </ListGroupItem>
+            <Fade in>
+                <ListGroupItem key={comment.id} >
+                    <p>{comment.comment}</p>
+                    <p>--{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(comment.date))}</p>
+                </ListGroupItem>
+            </Fade>
 
         );
     });
@@ -42,7 +51,9 @@ function RenderComments({ comments, addComment, dishId, postComment }) {
                     <h4>Comments</h4>
                 </ListGroupItem>
                 {/* LIST OF COMMENTS */}
-                {array_comments}
+                <Stagger in>
+                    {array_comments}
+                </Stagger>
             </ListGroup>
             <CommentForm postComment={postComment}
                 dishId={dishId} />
