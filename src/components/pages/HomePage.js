@@ -14,7 +14,7 @@ function RenderCard({ item, isLoading, errMess }) {
             <h4>{errMess}</h4>
         );
     }
-    else
+    else if (item)
         return (
             <Card>
                 <CardImg src={baseUrl + item.image} alt={item.name} />
@@ -25,7 +25,7 @@ function RenderCard({ item, isLoading, errMess }) {
                 </CardBody>
             </Card>
         );
-
+    return (<></>)
 }
 
 function HomePage(props) {
@@ -34,7 +34,7 @@ function HomePage(props) {
         <div className="container">
             <div className="row aling-items-start">
                 <div className="col-12 col-md m1">
-                    <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess} />
+                    <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishErrMess} />
                 </div>
                 <div className="col-12 col-md m1">
                     <RenderCard item={props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess} />
