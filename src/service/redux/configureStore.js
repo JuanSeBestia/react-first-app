@@ -7,6 +7,13 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { createForms } from 'react-redux-form';
 import { InitialFeedback } from './forms';
+import createSagaMiddleware from 'redux-saga'
+import charactersSaga from './characters';
+import { Characters } from './characters/Reducers'
+// Use with Chrome extension
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -15,12 +22,15 @@ export const ConfigureStore = () => {
             comments: Comments,
             promotions: Promotions,
             leaders: Leaders,
+            characters: Characters,
             ...createForms({
                 feedback: InitialFeedback
             })
-        }),
-        applyMiddleware(thunk, logger)
+        }), composeWithDevTools(
+            applyMiddleware(sagaMiddleware, thunk, logger)
+        )
     );
+    sagaMiddleware.run(charactersSaga);
 
     return store;
 }

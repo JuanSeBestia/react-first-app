@@ -10,14 +10,18 @@ import Contact from './pages/ContactComponent';
 import DishDetail from './menu/DishdetailComponent';
 import About from './pages/AboutPage';
 import { addComment, fetchDishes, fetchPromos, fetchComments, postComment } from '../service/redux/ActionCreators'
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap'
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { fetchCharacterSaga } from '../service/redux/characters/ActionCreators';
+
 const mapStateToProps = state => {
     return {
         dishes: state.dishes,
         comments: state.comments,
         promotions: state.promotions,
-        leaders: state.leaders
+        leaders: state.leaders,
+        characters: state.characters,
     }
 }
 
@@ -27,7 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
     fetchDishes: () => { dispatch(fetchDishes()) },
     resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
     fetchComments: () => dispatch(fetchComments()),
-    fetchPromos: () => dispatch(fetchPromos())
+    fetchPromos: () => dispatch(fetchPromos()),
+    fetchCharacters: () => dispatch(fetchCharacterSaga()),
 })
 
 class MainComponent extends Component {
@@ -44,10 +49,10 @@ class MainComponent extends Component {
         this.props.fetchDishes();
         this.props.fetchComments();
         this.props.fetchPromos();
+        this.props.fetchCharacters();
     }
 
     render() {
-
         const HomePageElement = () => {
             return (
                 <HomePage
@@ -58,6 +63,7 @@ class MainComponent extends Component {
                     promoLoading={this.props.promotions.isLoading}
                     promoErrMess={this.props.promotions.errMess}
                     leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+                    character={this.props.characters.characters[0]}
                 />
             );
         }
@@ -82,7 +88,6 @@ class MainComponent extends Component {
                 <About leaders={this.props.leaders} />
             )
         }
-        debugger;
         return (
             <React.Fragment>
                 <Header notification={this.props.dishes.length} title={this.props.title} />
@@ -100,7 +105,7 @@ class MainComponent extends Component {
                 </TransitionGroup>
                 <Footer />
 
-            </React.Fragment>
+            </React.Fragment >
         );
     }
 }

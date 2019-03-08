@@ -23,7 +23,8 @@ function RenderCard({ item, isLoading, errMess }) {
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
                 <Card>
-                    <CardImg src={baseUrl + item.image} alt={item.name} />
+                    {item.image ? <CardImg src={baseUrl + item.image} alt={item.name} /> : null}
+                    {item.thumbnail ? <CardImg src={item.thumbnail} alt={item.name} /> : null}
                     <CardBody>
                         <CardTitle>{item.name}</CardTitle>
                         {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
@@ -36,7 +37,6 @@ function RenderCard({ item, isLoading, errMess }) {
 }
 
 function HomePage(props) {
-
     return (
         <div className="container">
             <div className="row aling-items-start">
@@ -48,6 +48,9 @@ function HomePage(props) {
                 </div>
                 <div className="col-12 col-md m1">
                     <RenderCard item={props.leader} />
+                </div>
+                <div className="col-12 col-md m1">
+                    <RenderCard item={props.character} />
                 </div>
             </div>
         </div>
